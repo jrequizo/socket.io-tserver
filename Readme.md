@@ -8,6 +8,36 @@ Bring the best of tRPC for long-lived WebSocket connections.
 
 ---
 
+## Quickstart Guide
+
+WIP: installation
+
+```
+import { z } from "zod";
+import { createTSocketServer, socketEvent } from "socket.io-tserver";
+
+const server = createTSocketServer();
+server.init({
+    myEvent: socketEvent({
+        input: z.object({
+            name: z.string()
+        }),
+        handler({ input }) {
+            console.log(`hello ${input.name}!`);
+        },
+    }),
+})
+server.listen({
+    port: 3000,
+    listeningListener() {
+        console.log("listening");
+    },
+});
+```
+
+
+---
+
 ## High-level Overview
 
 - Builder pattern for defining Socket.IO events
